@@ -1,69 +1,45 @@
 # Power Platform AI Workflow Automation
 
-A portfolio blueprint for an AI-assisted internal service request workflow built around Microsoft Power Platform.
+A working standalone MVP for an internal service-request workflow, alongside an implementation path for Microsoft Power Platform integration.
 
-## Project overview
+## Run the app
 
-This project demonstrates how a team could capture service requests, route approvals, track work, and provide grounded answers to common questions using:
+**[Open the source app](index.html)** · **[View app logic](app.js)** · **[View styles](styles.css)**
 
-- **Power Apps** — request submission and status-tracking experience.
-- **Power Automate** — notifications, routing, approval, and status updates.
-- **SharePoint** — a practical starter data store for a small proof of concept.
-- **Dataverse** — an alternative when relational data, security roles, and a more structured application model are needed.
-- **Copilot Studio** — a conversational assistant for request-process FAQs and guided next steps.
-- **Microsoft Copilot** — an assisted authoring and productivity layer where licensed features and tenant policy permit.
+- To run locally, download or clone this repository and open `index.html` in a modern browser.
+- The app requires no build step or package installation.
+- GitHub Pages deployment is configured in `.github/workflows/deploy-pages.yml`. If Pages is not enabled for the repository, enable it in **Settings → Pages** and select GitHub Actions. Once the workflow succeeds, the Pages URL will appear in the workflow deployment details.
 
-**Project status:** Design blueprint / portfolio starter. This repository does not claim that a Power Platform environment, live connectors, deployed flows, or a production copilot have already been configured or tested.
+## Working features in this MVP
 
-## Problem statement
+- Dashboard with total, open, awaiting-approval, and completed counts.
+- Create and edit requests with required-field validation.
+- Request register with search and status/priority filters.
+- Request detail view, assignment, status updates, and activity history.
+- Approval/rejection decisions for requests marked as requiring approval.
+- Delete demo records with confirmation.
+- Export the request register to CSV.
+- Built-in FAQ assistant for request process questions and a safe fallback for unknown questions.
+- Responsive layout for desktop and mobile.
+- Sample records on first run; updates persist in the current browser through `localStorage`.
 
-Internal teams often receive requests through email or chat. Requests can be incomplete, difficult to prioritize, and hard to track. A consistent intake form, automated routing, transparent statuses, and a knowledge-grounded assistant can make the process easier to manage.
+## Important: what is and is not connected
 
-## Proposed workflow
+This is a functioning **browser-based MVP**, not a deployed Microsoft Power Platform solution. Its records are saved only in the browser profile on the device where it is used. It does not yet connect to SharePoint or Dataverse, trigger real Power Automate flows, send email/Teams notifications, or call a live Copilot Studio agent. The FAQ assistant is rule-based, not a hosted AI model.
 
-1. An employee submits a request in a Power Apps canvas app.
-2. The app validates required fields and saves the request to the selected data source.
-3. Power Automate sends an acknowledgement and routes the request based on category and priority.
-4. If required by policy, an approval step is sent to the designated approver.
-5. Status and decision details are written back to the request record.
-6. A Copilot Studio assistant answers process questions using approved knowledge sources and directs users to the request form or support team when it cannot answer reliably.
+Use fictional data only. Browser-local storage is not a secure multi-user database and should not be used for real employee requests or sensitive data.
 
-See [solution architecture](docs/solution-architecture.md), [data model](docs/data-model.md), [flows](docs/power-automate-flows.md), [Power Apps](docs/power-apps.md), and [Copilot Studio](docs/copilot-studio.md).
+## Microsoft Power Platform production path
 
-## Repository structure
+1. Create a development environment and select SharePoint or Dataverse as the source of truth.
+2. Build the Power Apps canvas app against that data source.
+3. Implement and test Power Automate acknowledgement, routing, approval, and status-notification flows.
+4. Replace browser-local storage with authenticated server-side data access; enforce permissions at the data source.
+5. Configure a Copilot Studio agent with approved knowledge sources, a clear fallback, and an authorized integration for any request-specific lookup.
+6. Validate tenant policies, licensing, DLP, audit, retention, and security before production use.
 
-```text
-.
-├── README.md
-├── PROJECT-STATUS.md
-├── docs/
-│   ├── solution-architecture.md
-│   ├── data-model.md
-│   ├── power-automate-flows.md
-│   ├── power-apps.md
-│   └── copilot-studio.md
-└── samples/
-    └── requests.csv
-```
+Detailed implementation plans: [architecture](docs/solution-architecture.md), [data model](docs/data-model.md), [Power Automate flows](docs/power-automate-flows.md), [Power Apps](docs/power-apps.md), and [Copilot Studio](docs/copilot-studio.md).
 
-## Suggested implementation sequence
+## Project status
 
-1. Choose SharePoint or Dataverse based on the prototype's complexity, security needs, and licensing.
-2. Create a development environment and a request table/list with the fields in the data model.
-3. Build the Power Apps intake and tracking screens.
-4. Implement and test the Power Automate flows with test records.
-5. Add approved FAQ content to Copilot Studio and configure a safe fallback.
-6. Test permissions, failure paths, duplicate submissions, approvals, and audit needs.
-7. Document screenshots, actual test results, and deployment steps after implementation.
-
-## Important implementation notes
-
-- Use fictional or properly anonymized sample data only.
-- Apply least-privilege access and environment governance.
-- Do not place secrets, access tokens, or personal data in source control.
-- Approval routing, retention, data residency, and AI use must follow the organization's policies.
-- Connector availability, licensing, and feature behavior depend on the tenant and environment.
-
-## Portfolio presentation
-
-When implementation is complete, add a short demo, architecture screenshot, test evidence, and a list of what was actually built. Until then, describe this repository as a **solution design and implementation plan**, not a deployed production system.
+See [PROJECT-STATUS.md](PROJECT-STATUS.md) for what is implemented in this repository versus what still requires a Microsoft environment. No live tenant integration or production deployment is claimed.
