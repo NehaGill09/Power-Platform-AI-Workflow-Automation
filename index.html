@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101828">
+  <title>FlowDesk — Service Request Hub</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="FlowDesk home"><span class="brand-mark">F</span><span>FlowDesk<small>WORKFLOW HUB</small></span></a>
+      <div class="nav-label">WORKSPACE</div>
+      <button class="nav-item active" data-view="dashboard"><span>▦</span> Overview</button>
+      <button class="nav-item" data-view="requests"><span>☷</span> All requests</button>
+      <button class="nav-item" data-view="new"><span>＋</span> New request</button>
+      <button class="nav-item" data-view="assistant"><span>✳</span> Help assistant</button>
+      <div class="sidebar-bottom"><div class="demo-pill"><span class="live-dot"></span> Local demo mode</div><p>Demo data stays in this browser. No Microsoft tenant is connected.</p></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div><div class="eyebrow">SERVICE OPERATIONS</div><h1 id="page-title">Overview</h1></div><div class="top-actions"><span class="date-chip" id="today-label"></span><button class="primary-btn" id="top-new">＋ New request</button></div></header>
+      <section id="view-dashboard" class="view">
+        <div class="welcome"><div><div class="eyebrow light">REQUEST MANAGEMENT</div><h2>Good work starts with a clear request.</h2><p>Track requests, route work, and keep every decision visible.</p></div><div class="welcome-symbol">↗</div></div>
+        <div class="stats-grid" id="stats"></div>
+        <div class="dashboard-grid">
+          <section class="panel"><div class="panel-head"><div><h3>Recent requests</h3><p>Your latest activity at a glance</p></div><button class="text-btn" data-go="requests">View all →</button></div><div id="recent-requests"></div></section>
+          <section class="panel quick-panel"><div class="panel-head"><div><h3>Quick actions</h3><p>Keep work moving</p></div></div><button class="quick-action" data-go="new"><span class="quick-icon purple">＋</span><span><b>Create a request</b><small>Log a new service need</small></span><span class="arrow">→</span></button><button class="quick-action" data-go="requests"><span class="quick-icon blue">✓</span><span><b>Review pending items</b><small>Check requests awaiting action</small></span><span class="arrow">→</span></button><button class="quick-action" data-go="assistant"><span class="quick-icon amber">✳</span><span><b>Ask the assistant</b><small>Get help with the process</small></span><span class="arrow">→</span></button><div class="tip"><b>Workflow tip</b><p>Complete the title, category, and description so your request can be routed correctly.</p></div></section>
+        </div>
+      </section>
+      <section id="view-requests" class="view hidden">
+        <div class="panel"><div class="panel-head"><div><h3>Request register</h3><p>Search, filter, and update requests in this demo.</p></div><button class="primary-btn" data-go="new">＋ Add request</button></div>
+          <div class="toolbar"><input id="search" type="search" placeholder="Search title, ID, category…" aria-label="Search requests"><select id="status-filter" aria-label="Filter by status"><option value="">All statuses</option><option>Submitted</option><option>Under review</option><option>Awaiting approval</option><option>Approved</option><option>Rejected</option><option>In progress</option><option>Completed</option><option>Cancelled</option></select><select id="priority-filter" aria-label="Filter by priority"><option value="">All priorities</option><option>High</option><option>Normal</option><option>Low</option></select></div>
+          <div class="table-wrap"><table><thead><tr><th>REQUEST</th><th>CATEGORY</th><th>PRIORITY</th><th>STATUS</th><th>ASSIGNED TO</th><th>CREATED</th><th></th></tr></thead><tbody id="request-table"></tbody></table></div><div id="empty-state" class="empty hidden"><div class="empty-icon">⌕</div><b>No requests found</b><p>Try a different search or create a request.</p><button class="primary-btn" data-go="new">Create request</button></div>
+        </div>
+      </section>
+      <section id="view-new" class="view hidden">
+        <div class="form-layout"><section class="panel form-panel"><div class="panel-head"><div><h3 id="form-heading">Create a request</h3><p>Enter the details needed to route this request.</p></div><span class="required-note">* Required</span></div>
+          <form id="request-form"><input type="hidden" id="edit-id"><label for="title">Request title <em>*</em></label><input id="title" maxlength="120" required placeholder="e.g. Access to reporting software"><label for="description">Description <em>*</em></label><textarea id="description" required maxlength="2000" rows="4" placeholder="What do you need and why?"></textarea><div class="two-col"><div><label for="category">Category <em>*</em></label><select id="category" required><option value="">Select category</option><option>Access</option><option>Equipment</option><option>Software</option><option>Data & reporting</option><option>General</option></select></div><div><label for="priority">Priority <em>*</em></label><select id="priority" required><option>Normal</option><option>Low</option><option>High</option></select></div></div><div class="two-col"><div><label for="requester">Requester email <em>*</em></label><input id="requester" type="email" required placeholder="you@example.com"></div><div><label for="assignee">Assigned to</label><input id="assignee" maxlength="120" placeholder="Person or support queue"></div></div><label class="check-row"><input id="approval-required" type="checkbox"> <span><b>Approval required</b><small>This request must be reviewed before work begins.</small></span></label><div class="form-footer"><button type="button" class="secondary-btn" data-go="requests">Cancel</button><button type="submit" class="primary-btn" id="submit-label">Create request →</button></div></form>
+        </section><aside class="panel side-note"><div class="note-icon">✦</div><h3>What happens next?</h3><ol><li><b>Request recorded</b><span>A unique ID is created for tracking.</span></li><li><b>Routing</b><span>Use category and priority to triage work.</span></li><li><b>Approval, if needed</b><span>Record a decision in the request details.</span></li><li><b>Resolution</b><span>Update status as the work progresses.</span></li></ol><p class="muted">In this standalone demo, these steps are user-driven—not live Power Automate flows.</p></aside></div>
+      </section>
+      <section id="view-detail" class="view hidden"><div id="detail-content"></div></section>
+      <section id="view-assistant" class="view hidden"><div class="assistant-layout"><section class="panel chat-panel"><div class="panel-head"><div><h3>FlowDesk assistant</h3><p><span class="live-dot"></span> Demo FAQ assistant · uses built-in guidance</p></div><span class="assistant-avatar">✳</span></div><div id="chat-messages" class="chat-messages"><div class="message bot"><b>Hi, I'm FlowDesk.</b><p>Ask me how to submit a request, what a status means, or how approvals work. This demo assistant uses a small built-in FAQ, not a live AI model.</p></div></div><div class="suggestions"><button data-prompt="How do I submit a request?">How do I submit?</button><button data-prompt="What does awaiting approval mean?">Approval status?</button><button data-prompt="What are the priority levels?">Priority levels?</button></div><form id="chat-form" class="chat-input"><input id="chat-input" autocomplete="off" placeholder="Ask a process question…" aria-label="Ask the assistant"><button class="primary-btn" type="submit">Send ↑</button></form></section><aside class="panel side-note"><div class="note-icon">◎</div><h3>Assistant boundaries</h3><p>This assistant answers general process questions only. It cannot access private records, verify request status, or make approvals.</p><div class="tip"><b>For real AI</b><p>Connect a Copilot Studio agent to approved knowledge sources and test authorization, fallback, and tenant policies.</p></div></aside></div></section>
+      <footer>FlowDesk · Functional local prototype <span>Data is stored in this browser only</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
