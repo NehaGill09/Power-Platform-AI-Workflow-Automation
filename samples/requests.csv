@@ -1,0 +1,5 @@
+Title,Description,Category,Priority,Status,ApprovalRequired
+"Request design software","Need access to the approved design tool for a project mockup.","Software","Normal","Submitted","false"
+"Replace damaged keyboard","Several keys are not responding on the assigned workstation.","Equipment","Low","Submitted","false"
+"Temporary folder access","Need temporary access to the shared project folder; manager approval may be required.","Access","High","Under review","true"
+"Install approved analytics tool","Request installation of an approved analytics application for reporting work.","Software","Normal","Submitted","true"
