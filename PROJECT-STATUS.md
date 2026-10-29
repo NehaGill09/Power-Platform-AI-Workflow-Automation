@@ -1,31 +1,38 @@
 # Project Status
 
-**Current stage:** Design blueprint / implementation planning
+**Current stage:** Functional standalone browser MVP; Microsoft Power Platform integration is not yet connected.
 
-## Included in this repository
+## Implemented in this repository
 
-- Proposed solution architecture and workflow.
-- Starter data model with SharePoint and Dataverse considerations.
-- Flow-by-flow Power Automate implementation plan.
-- Illustrative Power Apps screen and Power Fx guidance.
-- Copilot Studio assistant scope, grounding, and fallback guidance.
-- Fictional CSV sample data for planning and local review.
+- [x] Responsive browser interface with dashboard and navigation.
+- [x] Create and edit service requests with required-field validation.
+- [x] Search and filter by status and priority.
+- [x] Request details, assignment, status changes, and activity history.
+- [x] Record approve/reject decisions for requests requiring approval.
+- [x] Confirmed deletion of demo records.
+- [x] CSV export.
+- [x] Built-in FAQ assistant with a fallback for unsupported questions.
+- [x] Browser-local persistence using `localStorage`.
+- [x] GitHub Actions workflow for GitHub Pages deployment.
 
-## Not yet verified as implemented
+## Limitations
 
-- Power Platform environment or solution package.
-- Live SharePoint list or Dataverse tables.
-- Connected Power Apps application.
-- Imported or enabled Power Automate flows.
-- Published Copilot Studio agent.
-- End-to-end integration or deployment tests.
+- Data stays in one browser profile and does not sync between users/devices.
+- The FAQ assistant uses simple rules; it is not a live generative AI model.
+- No SharePoint or Dataverse connector is configured.
+- No live Power Automate flow, email/Teams notification, or approval service is configured.
+- No Copilot Studio agent is connected or published.
+- GitHub Pages deployment depends on the repository's Pages settings and a successful Actions run.
 
-## Next milestones
+## Next steps for a production Power Platform implementation
 
-- [ ] Select the target data source and document the decision.
-- [ ] Create the development environment and schema.
-- [ ] Build the request submission and tracking app.
-- [ ] Implement and test acknowledgement, routing, approval, and status flows.
-- [ ] Configure the assistant with approved knowledge sources and fallback behavior.
-- [ ] Record test cases and actual outcomes.
-- [ ] Add screenshots and deployment notes after successful implementation.
+- [ ] Confirm access to a Microsoft Power Platform development environment.
+- [ ] Choose SharePoint or Dataverse and create the request schema.
+- [ ] Build the native Power Apps canvas app against the real data source.
+- [ ] Build and test Power Automate acknowledgement, routing, approval, and status flows.
+- [ ] Configure authenticated identity and enforce data-source permissions.
+- [ ] Create and publish a Copilot Studio agent using approved knowledge sources.
+- [ ] Test authorization, failure paths, duplicate triggers, approval timeout, and audit needs.
+- [ ] Capture evidence of the real implementation and document deployment.
+
+**Security note:** Use fictional data only in this standalone MVP. Browser local storage is not a secure production database.
